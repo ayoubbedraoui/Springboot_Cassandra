@@ -1,0 +1,8 @@
+docker-compose up
+docker exec -it 6ca5db397a50 bash
+cqlsh
+describe keyspaces;
+create a keyspace : CREATE KEYSPACE products WITH replication = {'class':'SimpleStrategy', 'replication_factor' : 3};
+ use products;
+CREATE TABLE Product( id int PRIMARY KEY, name text, price float);
+describe tables;
