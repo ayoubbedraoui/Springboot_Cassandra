@@ -18,15 +18,25 @@ public class ProductController {
 
     @PostMapping
     public ResponseEntity<Product> addProduct(@RequestBody Product product) {
-        Product savedProduct = productRepository.save(product);
-        return ResponseEntity.ok(savedProduct);
+        try {
+            Product savedProduct = productRepository.save(product);
+            return ResponseEntity.ok(savedProduct);
+        } catch (Exception e) {
+            e.printStackTrace(); // Ajoutez une capture de l'exception pour déboguer
+            throw e; // Relancez l'exception pour la gestion globale
+        }
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Product> findById(@PathVariable("id") Integer productId) {
-        Product product = productRepository.findById(productId)
-                .orElseThrow(() -> new ResouceNotFoundException("Product not found with ID: " + productId));
-        return ResponseEntity.ok(product);
+        try {
+            Product product = productRepository.findById(productId)
+                    .orElseThrow(() -> new ResouceNotFoundException("Product not found with ID: " + productId));
+            return ResponseEntity.ok(product);
+        } catch (Exception e) {
+            e.printStackTrace(); // Ajoutez une capture de l'exception pour déboguer
+            throw e; // Relancez l'exception pour la gestion globale
+        }
     }
 
     @GetMapping

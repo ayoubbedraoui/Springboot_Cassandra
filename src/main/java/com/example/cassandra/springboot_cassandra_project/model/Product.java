@@ -7,17 +7,21 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.cassandra.core.mapping.PrimaryKey;
 import org.springframework.data.cassandra.core.mapping.Table;
 
-@Table
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Table("products")
+
 public class Product {
 
     @PrimaryKey
     private int id;
     private String name;
-    private double price;
+    private Double price;
 
+    public Product() {}
+    public Product(int id, String name, Double price) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+    }
     // Getter and setter for name
     public String getName() {
         return name;
@@ -28,11 +32,11 @@ public class Product {
     }
 
     // Getter and setter for price
-    public double getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 }
